@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice-Controlled Chess Board Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Voice-Controlled Chess Board Game</h1>
+        <div class="game-area">
+            <canvas id="chessboard" width="400" height="400"></canvas>
+            <div class="info-panel">
+                <div id="score">Score: 0</div>
+                <div id="current-word"></div>
+                <div id="controls">
+                    <button id="startListening">Start Listening</button>
+                    <p id="status">Click "Start Listening" and say a command</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/chessboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/voice_control.js') }}"></script>
+</body>
+</html>
