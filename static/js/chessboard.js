@@ -5,8 +5,18 @@ class ChessBoard {
         this.squareSize = 50;
         this.knightPosition = { x: 0, y: 0 };
         this.objects = [];
+        this.images = {};
+        this.loadImages();
         this.drawBoard();
         this.drawKnight();
+    }
+
+    loadImages() {
+        const difficulties = ['easy', 'medium', 'hard'];
+        difficulties.forEach(difficulty => {
+            this.images[difficulty] = new Image();
+            this.images[difficulty].src = `/static/images/${difficulty}.png`;
+        });
     }
 
     drawBoard() {
@@ -33,26 +43,17 @@ class ChessBoard {
 
     drawObjects() {
         this.objects.forEach(obj => {
-            this.ctx.fillStyle = this.getDifficultyColor(obj.difficulty);
-            this.ctx.beginPath();
-            this.ctx.arc(
-                obj.x * this.squareSize + this.squareSize / 2,
-                obj.y * this.squareSize + this.squareSize / 2,
-                this.squareSize / 4,
-                0,
-                2 * Math.PI
-            );
-            this.ctx.fill();
+            const img = this.images[obj.difficulty];
+            if (img.complete) {
+                this.ctx.drawImage(
+                    img,
+                    obj.x * this.squareSize,
+                    obj.y * this.squareSize,
+                    this.squareSize,
+                    this.squareSize
+                );
+            }
         });
-    }
-
-    getDifficultyColor(difficulty) {
-        switch (difficulty) {
-            case 'easy': return '#00ff00';
-            case 'medium': return '#ffff00';
-            case 'hard': return '#ff8c00';
-            default: return '#0000ff';
-        }
     }
 
     async moveKnight(direction) {

@@ -8,11 +8,11 @@ objects = []
 score = 0
 current_word = ""
 
-# Word list with difficulties
-word_list = {
-    'easy': ['cat', 'dog', 'hat', 'ball', 'tree'],
-    'medium': ['elephant', 'computer', 'bicycle', 'umbrella', 'guitar'],
-    'hard': ['xylophone', 'cryptocurrency', 'paradigm', 'juxtaposition', 'serendipity']
+# Image filenames with difficulties
+image_files = {
+    'easy': ['cat.png', 'dog.png', 'hat.png', 'ball.png', 'tree.png'],
+    'medium': ['elephant.png', 'computer.png', 'bicycle.png', 'umbrella.png', 'guitar.png'],
+    'hard': ['xylophone.png', 'cryptocurrency.png', 'paradigm.png', 'juxtaposition.png', 'serendipity.png']
 }
 
 @app.route("/")
@@ -25,10 +25,10 @@ def generate_objects():
     objects = []
     for _ in range(5):
         difficulty = random.choice(['easy', 'medium', 'hard'])
-        word = random.choice(word_list[difficulty])
+        image = random.choice(image_files[difficulty])
         x = random.randint(0, 7)
         y = random.randint(0, 7)
-        objects.append({'word': word, 'x': x, 'y': y, 'difficulty': difficulty})
+        objects.append({'image': image, 'x': x, 'y': y, 'difficulty': difficulty})
     return jsonify(objects)
 
 @app.route("/collect_object", methods=['POST'])
@@ -39,7 +39,7 @@ def collect_object():
     
     for obj in objects:
         if obj['x'] == knight_x and obj['y'] == knight_y:
-            current_word = obj['word']
+            current_word = obj['image'].split('.')[0]  # Remove file extension
             objects.remove(obj)
             return jsonify({'success': True, 'word': current_word})
     
