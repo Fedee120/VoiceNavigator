@@ -8,7 +8,7 @@ class ChessBoard {
         this.images = {};
         this.loadImages();
         this.drawBoard();
-        this.drawKnight();
+        this.createKnight();
     }
 
     loadImages() {
@@ -57,17 +57,21 @@ class ChessBoard {
         }
     }
 
-    drawKnight() {
-        this.ctx.fillStyle = '#f00';
-        this.ctx.beginPath();
-        this.ctx.arc(
-            this.knightPosition.x * this.squareSize + this.squareSize / 2,
-            this.knightPosition.y * this.squareSize + this.squareSize / 2,
-            this.squareSize / 3,
-            0,
-            2 * Math.PI
-        );
-        this.ctx.fill();
+    createKnight() {
+        const knight = document.createElement('div');
+        knight.className = 'chess-piece';
+        knight.style.width = `${this.squareSize}px`;
+        knight.style.height = `${this.squareSize}px`;
+        knight.style.borderRadius = '50%';
+        knight.style.backgroundColor = '#f00';
+        this.updateKnightPosition();
+        this.canvas.parentNode.appendChild(knight);
+        this.knightElement = knight;
+    }
+
+    updateKnightPosition() {
+        this.knightElement.style.left = `${this.knightPosition.x * this.squareSize}px`;
+        this.knightElement.style.top = `${this.knightPosition.y * this.squareSize}px`;
     }
 
     drawObjects() {
@@ -76,24 +80,21 @@ class ChessBoard {
             const img = this.images[obj.image];
             if (img && img.complete && img.naturalHeight !== 0) {
                 console.log(`Drawing image: ${obj.image} at (${obj.x}, ${obj.y})`);
-                this.ctx.drawImage(
-                    img,
-                    obj.x * this.squareSize,
-                    obj.y * this.squareSize,
-                    this.squareSize,
-                    this.squareSize
-                );
+                const objectElement = document.createElement('img');
+                objectElement.src = `/words/${obj.image}`;
+                objectElement.className = 'chess-object';
+                objectElement.style.width = `${this.squareSize}px`;
+                objectElement.style.height = `${this.squareSize}px`;
+                objectElement.style.left = `${obj.x * this.squareSize}px`;
+                objectElement.style.top = `${obj.y * this.squareSize}px`;
+                this.canvas.parentNode.appendChild(objectElement);
             } else {
                 console.log(`Image not ready or failed to load: ${obj.image}`);
-                // Draw a placeholder square
-                this.ctx.fillStyle = 'gray';
-                this.ctx.fillRect(obj.x * this.squareSize, obj.y * this.squareSize, this.squareSize, this.squareSize);
             }
         });
     }
 
     async moveKnight(direction) {
-        this.drawBoard();
         switch (direction) {
             case 'up':
                 if (this.knightPosition.y > 0) this.knightPosition.y--;
@@ -108,8 +109,7 @@ class ChessBoard {
                 if (this.knightPosition.x < 7) this.knightPosition.x++;
                 break;
         }
-        this.drawKnight();
-        this.drawObjects();
+        this.updateKnightPosition();
 
         const response = await fetch('/collect_object', {
             method: 'POST',
@@ -122,10 +122,19 @@ class ChessBoard {
         if (data.success) {
             document.getElementById('current-word').textContent = `Pronounce: ${data.word}`;
             this.objects = this.objects.filter(obj => obj.x !== this.knightPosition.x || obj.y !== this.knightPosition.y);
-            this.drawBoard();
-            this.drawKnight();
-            this.drawObjects();
+            this.removeCollectedObject();
         }
+    }
+
+    removeCollectedObject() {
+        const objects = this.canvas.parentNode.querySelectorAll('.chess-object');
+        objects.forEach(obj => {
+            const left = parseInt(obj.style.left) / this.squareSize;
+            const top = parseInt(obj.style.top) / this.squareSize;
+            if (left === this.knightPosition.x && top === this.knightPosition.y) {
+                obj.remove();
+            }
+        });
     }
 
     async generateObjects() {
