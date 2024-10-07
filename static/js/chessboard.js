@@ -87,6 +87,7 @@ class ChessBoard {
 
     drawObjects() {
         console.log("Drawing objects...");
+        const canvasRect = this.canvas.getBoundingClientRect();
         this.objects.forEach(obj => {
             const img = this.images[obj.image];
             if (img && img.complete && img.naturalHeight !== 0) {
@@ -98,9 +99,8 @@ class ChessBoard {
                 objectElement.style.height = `${this.squareSize}px`;
                 objectElement.style.position = 'absolute';
                 objectElement.style.zIndex = '10';
-                const canvasRect = this.canvas.getBoundingClientRect();
-                objectElement.style.left = `${canvasRect.left + obj.x * this.squareSize}px`;
-                objectElement.style.top = `${canvasRect.top + obj.y * this.squareSize}px`;
+                objectElement.style.left = `${obj.x * this.squareSize}px`;
+                objectElement.style.top = `${obj.y * this.squareSize}px`;
                 this.canvas.parentNode.appendChild(objectElement);
             } else {
                 console.log(`Image not ready or failed to load: ${obj.image}`);
@@ -144,9 +144,8 @@ class ChessBoard {
     removeCollectedObject() {
         const objects = this.canvas.parentNode.querySelectorAll('.chess-object');
         objects.forEach(obj => {
-            const canvasRect = this.canvas.getBoundingClientRect();
-            const left = (parseInt(obj.style.left) - canvasRect.left) / this.squareSize;
-            const top = (parseInt(obj.style.top) - canvasRect.top) / this.squareSize;
+            const left = parseInt(obj.style.left) / this.squareSize;
+            const top = parseInt(obj.style.top) / this.squareSize;
             if (left === this.knightPosition.x && top === this.knightPosition.y) {
                 obj.remove();
             }
