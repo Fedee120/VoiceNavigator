@@ -58,20 +58,30 @@ class ChessBoard {
     }
 
     createKnight() {
+        console.log("Creating knight...");
         const knight = document.createElement('div');
         knight.className = 'chess-piece';
         knight.style.width = `${this.squareSize}px`;
         knight.style.height = `${this.squareSize}px`;
         knight.style.borderRadius = '50%';
         knight.style.backgroundColor = '#f00';
+        knight.style.position = 'absolute';
+        knight.style.zIndex = '20';
         this.updateKnightPosition();
         this.canvas.parentNode.appendChild(knight);
         this.knightElement = knight;
+        console.log("Knight created:", this.knightElement);
     }
 
     updateKnightPosition() {
-        this.knightElement.style.left = `${this.knightPosition.x * this.squareSize}px`;
-        this.knightElement.style.top = `${this.knightPosition.y * this.squareSize}px`;
+        console.log("Updating knight position...");
+        if (this.knightElement) {
+            this.knightElement.style.left = `${this.knightPosition.x * this.squareSize}px`;
+            this.knightElement.style.top = `${this.knightPosition.y * this.squareSize}px`;
+            console.log("Knight position updated:", this.knightPosition);
+        } else {
+            console.error("Knight element not found!");
+        }
     }
 
     drawObjects() {
@@ -87,6 +97,8 @@ class ChessBoard {
                 objectElement.style.height = `${this.squareSize}px`;
                 objectElement.style.left = `${obj.x * this.squareSize}px`;
                 objectElement.style.top = `${obj.y * this.squareSize}px`;
+                objectElement.style.position = 'absolute';
+                objectElement.style.zIndex = '10';
                 this.canvas.parentNode.appendChild(objectElement);
             } else {
                 console.log(`Image not ready or failed to load: ${obj.image}`);
@@ -95,6 +107,7 @@ class ChessBoard {
     }
 
     async moveKnight(direction) {
+        console.log("Moving knight:", direction);
         switch (direction) {
             case 'up':
                 if (this.knightPosition.y > 0) this.knightPosition.y--;
