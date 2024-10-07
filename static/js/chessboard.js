@@ -12,23 +12,37 @@ class ChessBoard {
     }
 
     loadImages() {
-        console.log("Loading images...");  // Debugging line
+        console.log("Loading images...");
         fetch('/generate_objects', { method: 'POST' })
             .then(response => response.json())
             .then(objects => {
-                console.log("Received objects:", objects);  // Debugging line
+                console.log("Received objects:", objects);
+                this.objects = objects;
+                let loadedImages = 0;
                 objects.forEach(obj => {
                     if (!this.images[obj.image]) {
                         this.images[obj.image] = new Image();
                         this.images[obj.image].src = `/static/images/${obj.image}`;
-                        console.log(`Loading image: ${obj.image}`);  // Debugging line
+                        console.log(`Loading image: ${obj.image}`);
                         this.images[obj.image].onload = () => {
-                            console.log(`Image loaded: ${obj.image}`);  // Debugging line
-                            this.drawObjects();
+                            console.log(`Image loaded: ${obj.image}`);
+                            loadedImages++;
+                            if (loadedImages === objects.length) {
+                                this.drawObjects();
+                            }
                         };
                         this.images[obj.image].onerror = () => {
-                            console.error(`Failed to load image: ${obj.image}`);  // Debugging line
+                            console.error(`Failed to load image: ${obj.image}`);
+                            loadedImages++;
+                            if (loadedImages === objects.length) {
+                                this.drawObjects();
+                            }
                         };
+                    } else {
+                        loadedImages++;
+                        if (loadedImages === objects.length) {
+                            this.drawObjects();
+                        }
                     }
                 });
             });
@@ -57,11 +71,11 @@ class ChessBoard {
     }
 
     drawObjects() {
-        console.log("Drawing objects...");  // Debugging line
+        console.log("Drawing objects...");
         this.objects.forEach(obj => {
             const img = this.images[obj.image];
-            if (img && img.complete) {
-                console.log(`Drawing image: ${obj.image} at (${obj.x}, ${obj.y})`);  // Debugging line
+            if (img && img.complete && img.naturalHeight !== 0) {
+                console.log(`Drawing image: ${obj.image} at (${obj.x}, ${obj.y})`);
                 this.ctx.drawImage(
                     img,
                     obj.x * this.squareSize,
@@ -70,7 +84,10 @@ class ChessBoard {
                     this.squareSize
                 );
             } else {
-                console.log(`Image not ready: ${obj.image}`);  // Debugging line
+                console.log(`Image not ready or failed to load: ${obj.image}`);
+                // Draw a colored square as a fallback
+                this.ctx.fillStyle = obj.image.includes('easy') ? 'green' : (obj.image.includes('medium') ? 'yellow' : 'red');
+                this.ctx.fillRect(obj.x * this.squareSize, obj.y * this.squareSize, this.squareSize, this.squareSize);
             }
         });
     }
@@ -105,17 +122,18 @@ class ChessBoard {
         if (data.success) {
             document.getElementById('current-word').textContent = `Pronounce: ${data.word}`;
             this.objects = this.objects.filter(obj => obj.x !== this.knightPosition.x || obj.y !== this.knightPosition.y);
+            this.drawBoard();
+            this.drawKnight();
+            this.drawObjects();
         }
     }
 
     async generateObjects() {
-        console.log("Generating objects...");  // Debugging line
+        console.log("Generating objects...");
         const response = await fetch('/generate_objects', { method: 'POST' });
         this.objects = await response.json();
-        console.log("Generated objects:", this.objects);  // Debugging line
-        this.drawBoard();
-        this.drawKnight();
-        this.drawObjects();
+        console.log("Generated objects:", this.objects);
+        this.loadImages();
     }
 }
 
