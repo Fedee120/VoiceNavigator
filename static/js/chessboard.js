@@ -67,17 +67,18 @@ class ChessBoard {
         knight.style.backgroundColor = '#f00';
         knight.style.position = 'absolute';
         knight.style.zIndex = '20';
-        this.updateKnightPosition();
         this.canvas.parentNode.appendChild(knight);
         this.knightElement = knight;
+        this.updateKnightPosition();
         console.log("Knight created:", this.knightElement);
     }
 
     updateKnightPosition() {
         console.log("Updating knight position...");
         if (this.knightElement) {
-            this.knightElement.style.left = `${this.knightPosition.x * this.squareSize}px`;
-            this.knightElement.style.top = `${this.knightPosition.y * this.squareSize}px`;
+            const canvasRect = this.canvas.getBoundingClientRect();
+            this.knightElement.style.left = `${canvasRect.left + this.knightPosition.x * this.squareSize}px`;
+            this.knightElement.style.top = `${canvasRect.top + this.knightPosition.y * this.squareSize}px`;
             console.log("Knight position updated:", this.knightPosition);
         } else {
             console.error("Knight element not found!");
@@ -95,10 +96,11 @@ class ChessBoard {
                 objectElement.className = 'chess-object';
                 objectElement.style.width = `${this.squareSize}px`;
                 objectElement.style.height = `${this.squareSize}px`;
-                objectElement.style.left = `${obj.x * this.squareSize}px`;
-                objectElement.style.top = `${obj.y * this.squareSize}px`;
                 objectElement.style.position = 'absolute';
                 objectElement.style.zIndex = '10';
+                const canvasRect = this.canvas.getBoundingClientRect();
+                objectElement.style.left = `${canvasRect.left + obj.x * this.squareSize}px`;
+                objectElement.style.top = `${canvasRect.top + obj.y * this.squareSize}px`;
                 this.canvas.parentNode.appendChild(objectElement);
             } else {
                 console.log(`Image not ready or failed to load: ${obj.image}`);
@@ -142,8 +144,9 @@ class ChessBoard {
     removeCollectedObject() {
         const objects = this.canvas.parentNode.querySelectorAll('.chess-object');
         objects.forEach(obj => {
-            const left = parseInt(obj.style.left) / this.squareSize;
-            const top = parseInt(obj.style.top) / this.squareSize;
+            const canvasRect = this.canvas.getBoundingClientRect();
+            const left = (parseInt(obj.style.left) - canvasRect.left) / this.squareSize;
+            const top = (parseInt(obj.style.top) - canvasRect.top) / this.squareSize;
             if (left === this.knightPosition.x && top === this.knightPosition.y) {
                 obj.remove();
             }
