@@ -60,13 +60,13 @@ class ChessBoard {
     createKnight() {
         console.log("Creating knight...");
         const knight = document.createElement('div');
-        knight.className = 'chess-piece';
+        knight.className = 'chess-piece knight';
         knight.style.width = `${this.squareSize}px`;
         knight.style.height = `${this.squareSize}px`;
         knight.style.borderRadius = '50%';
         knight.style.backgroundColor = '#f00';
         knight.style.position = 'absolute';
-        knight.style.zIndex = '20';
+        knight.style.zIndex = '30';
         this.canvas.parentNode.appendChild(knight);
         this.knightElement = knight;
         this.updateKnightPosition();
@@ -76,9 +76,9 @@ class ChessBoard {
     updateKnightPosition() {
         console.log("Updating knight position...");
         if (this.knightElement) {
-            const canvasRect = this.canvas.getBoundingClientRect();
-            this.knightElement.style.left = `${canvasRect.left + this.knightPosition.x * this.squareSize}px`;
-            this.knightElement.style.top = `${canvasRect.top + this.knightPosition.y * this.squareSize}px`;
+            const offset = 2; // Small offset to center the knight within the square
+            this.knightElement.style.left = `${this.knightPosition.x * this.squareSize + offset}px`;
+            this.knightElement.style.top = `${this.knightPosition.y * this.squareSize + offset}px`;
             console.log("Knight position updated:", this.knightPosition);
         } else {
             console.error("Knight element not found!");
@@ -87,7 +87,6 @@ class ChessBoard {
 
     drawObjects() {
         console.log("Drawing objects...");
-        const canvasRect = this.canvas.getBoundingClientRect();
         this.objects.forEach(obj => {
             const img = this.images[obj.image];
             if (img && img.complete && img.naturalHeight !== 0) {
@@ -98,7 +97,7 @@ class ChessBoard {
                 objectElement.style.width = `${this.squareSize}px`;
                 objectElement.style.height = `${this.squareSize}px`;
                 objectElement.style.position = 'absolute';
-                objectElement.style.zIndex = '10';
+                objectElement.style.zIndex = '20';
                 objectElement.style.left = `${obj.x * this.squareSize}px`;
                 objectElement.style.top = `${obj.y * this.squareSize}px`;
                 this.canvas.parentNode.appendChild(objectElement);
