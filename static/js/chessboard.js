@@ -134,7 +134,9 @@ class ChessBoard {
         });
         const data = await response.json();
         if (data.success) {
-            document.getElementById('current-word').textContent = `Pronounce: ${data.word}`;
+            const currentWordElement = document.getElementById('current-word');
+            currentWordElement.textContent = `Pronounce: ${data.word}`;
+            console.log(`Current word updated: ${data.word}`);
             this.objects = this.objects.filter(obj => obj.x !== this.knightPosition.x || obj.y !== this.knightPosition.y);
             this.removeCollectedObject();
         }

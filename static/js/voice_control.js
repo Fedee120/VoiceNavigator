@@ -66,12 +66,13 @@ class VoiceControl {
         
         const statusElement = document.getElementById('status');
         const scoreElement = document.getElementById('score');
+        const currentWordElement = document.getElementById('current-word');
         
         if (data.correct) {
             statusElement.textContent = 'Correct pronunciation!';
             scoreElement.textContent = `Score: ${data.score}`;
             this.currentWord = "";
-            document.getElementById('current-word').textContent = "";
+            currentWordElement.textContent = "";
             this.chessBoard.generateObjects();
         } else {
             statusElement.textContent = 'Incorrect pronunciation. Try again!';
@@ -80,6 +81,9 @@ class VoiceControl {
 
     setCurrentWord(word) {
         this.currentWord = word;
+        const currentWordElement = document.getElementById('current-word');
+        currentWordElement.textContent = `Pronounce: ${word}`;
+        console.log(`Current word set: ${word}`);
     }
 }
 
