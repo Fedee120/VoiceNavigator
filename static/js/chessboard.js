@@ -22,7 +22,7 @@ class ChessBoard {
                 objects.forEach(obj => {
                     if (!this.images[obj.image]) {
                         this.images[obj.image] = new Image();
-                        this.images[obj.image].src = `/static/images/${obj.image}`;
+                        this.images[obj.image].src = `/words/${obj.image}`;
                         console.log(`Loading image: ${obj.image}`);
                         this.images[obj.image].onload = () => {
                             console.log(`Image loaded: ${obj.image}`);
@@ -85,8 +85,8 @@ class ChessBoard {
                 );
             } else {
                 console.log(`Image not ready or failed to load: ${obj.image}`);
-                // Draw a colored square as a fallback
-                this.ctx.fillStyle = obj.image.includes('easy') ? 'green' : (obj.image.includes('medium') ? 'yellow' : 'red');
+                // Draw a placeholder square
+                this.ctx.fillStyle = 'gray';
                 this.ctx.fillRect(obj.x * this.squareSize, obj.y * this.squareSize, this.squareSize, this.squareSize);
             }
         });
