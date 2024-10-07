@@ -12,11 +12,26 @@ class ChessBoard {
     }
 
     loadImages() {
-        const difficulties = ['easy', 'medium', 'hard'];
-        difficulties.forEach(difficulty => {
-            this.images[difficulty] = new Image();
-            this.images[difficulty].src = `/static/images/${difficulty}.png`;
-        });
+        console.log("Loading images...");  // Debugging line
+        fetch('/generate_objects', { method: 'POST' })
+            .then(response => response.json())
+            .then(objects => {
+                console.log("Received objects:", objects);  // Debugging line
+                objects.forEach(obj => {
+                    if (!this.images[obj.image]) {
+                        this.images[obj.image] = new Image();
+                        this.images[obj.image].src = `/static/images/${obj.image}`;
+                        console.log(`Loading image: ${obj.image}`);  // Debugging line
+                        this.images[obj.image].onload = () => {
+                            console.log(`Image loaded: ${obj.image}`);  // Debugging line
+                            this.drawObjects();
+                        };
+                        this.images[obj.image].onerror = () => {
+                            console.error(`Failed to load image: ${obj.image}`);  // Debugging line
+                        };
+                    }
+                });
+            });
     }
 
     drawBoard() {
@@ -42,9 +57,11 @@ class ChessBoard {
     }
 
     drawObjects() {
+        console.log("Drawing objects...");  // Debugging line
         this.objects.forEach(obj => {
-            const img = this.images[obj.difficulty];
-            if (img.complete) {
+            const img = this.images[obj.image];
+            if (img && img.complete) {
+                console.log(`Drawing image: ${obj.image} at (${obj.x}, ${obj.y})`);  // Debugging line
                 this.ctx.drawImage(
                     img,
                     obj.x * this.squareSize,
@@ -52,6 +69,8 @@ class ChessBoard {
                     this.squareSize,
                     this.squareSize
                 );
+            } else {
+                console.log(`Image not ready: ${obj.image}`);  // Debugging line
             }
         });
     }
@@ -90,8 +109,10 @@ class ChessBoard {
     }
 
     async generateObjects() {
+        console.log("Generating objects...");  // Debugging line
         const response = await fetch('/generate_objects', { method: 'POST' });
         this.objects = await response.json();
+        console.log("Generated objects:", this.objects);  // Debugging line
         this.drawBoard();
         this.drawKnight();
         this.drawObjects();
