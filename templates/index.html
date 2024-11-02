@@ -1,29 +1,48 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta y título -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice-Controlled Chess Board Game</title>
+    <title>English Adventure Game</title>
+    <!-- Enlaces a estilos y fuentes -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Librerías JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <!-- Incluir annyang.js desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Voice-Controlled Chess Board Game</h1>
+        <h1>English Adventure!</h1>
         <div class="game-area">
-            <div id="chessboard-container" style="position: relative;">
+            <!-- Tablero a la izquierda -->
+            <div id="chessboard-container">
                 <canvas id="chessboard" width="400" height="400"></canvas>
             </div>
+            <!-- Panel de información a la derecha -->
             <div class="info-panel">
+                <h2>Your Mission</h2>
                 <div id="score">Score: 0</div>
-                <div id="current-word"></div>
+                <div id="current-word">Collect the words!</div>
                 <div id="controls">
-                    <button id="startListening">Start Listening</button>
-                    <p id="status">Click "Start Listening" and say a command</p>
+                    <!-- Eliminamos el botón -->
+                    <!-- <button id="startListening">🎤 Start Speaking</button> -->
+                    <p id="status">Say a command!</p>
+                    <!-- Indicador de escucha -->
+                    <div id="listening-indicator" class="hidden">
+                        <img src="/static/images/listening.gif" alt="Listening..." width="100">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/chessboard.js') }}"></script>
     <script src="{{ url_for('static', filename='js/voice_control.js') }}"></script>
 </body>

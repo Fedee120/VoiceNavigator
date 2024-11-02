@@ -1,3 +1,5 @@
+// static/js/chessboard.js
+
 class ChessBoard {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
@@ -6,46 +8,9 @@ class ChessBoard {
         this.knightPosition = { x: 0, y: 0 };
         this.objects = [];
         this.images = {};
-        this.loadImages();
         this.drawBoard();
         this.createKnight();
-    }
-
-    loadImages() {
-        console.log("Loading images...");
-        fetch('/generate_objects', { method: 'POST' })
-            .then(response => response.json())
-            .then(objects => {
-                console.log("Received objects:", objects);
-                this.objects = objects;
-                let loadedImages = 0;
-                objects.forEach(obj => {
-                    if (!this.images[obj.image]) {
-                        this.images[obj.image] = new Image();
-                        this.images[obj.image].src = `/words/${obj.image}`;
-                        console.log(`Loading image: ${obj.image}`);
-                        this.images[obj.image].onload = () => {
-                            console.log(`Image loaded: ${obj.image}`);
-                            loadedImages++;
-                            if (loadedImages === objects.length) {
-                                this.drawObjects();
-                            }
-                        };
-                        this.images[obj.image].onerror = () => {
-                            console.error(`Failed to load image: ${obj.image}`);
-                            loadedImages++;
-                            if (loadedImages === objects.length) {
-                                this.drawObjects();
-                            }
-                        };
-                    } else {
-                        loadedImages++;
-                        if (loadedImages === objects.length) {
-                            this.drawObjects();
-                        }
-                    }
-                });
-            });
+        this.loadImages();
     }
 
     drawBoard() {
@@ -59,52 +24,24 @@ class ChessBoard {
 
     createKnight() {
         console.log("Creating knight...");
-        const knight = document.createElement('div');
-        knight.className = 'chess-piece knight';
+        const knight = document.createElement('img');
+        knight.src = '/static/images/character.png'; // Ruta a la imagen del personaje
+        knight.className = 'chess-piece';
         knight.style.width = `${this.squareSize}px`;
         knight.style.height = `${this.squareSize}px`;
-        knight.style.borderRadius = '50%';
-        knight.style.backgroundColor = '#f00';
         knight.style.position = 'absolute';
         knight.style.zIndex = '30';
         this.canvas.parentNode.appendChild(knight);
         this.knightElement = knight;
         this.updateKnightPosition();
-        console.log("Knight created:", this.knightElement);
     }
 
     updateKnightPosition() {
-        console.log("Updating knight position...");
         if (this.knightElement) {
-            const offset = 2; // Small offset to center the knight within the square
+            const offset = 2; // Ajuste para centrar el personaje
             this.knightElement.style.left = `${this.knightPosition.x * this.squareSize + offset}px`;
             this.knightElement.style.top = `${this.knightPosition.y * this.squareSize + offset}px`;
-            console.log("Knight position updated:", this.knightPosition);
-        } else {
-            console.error("Knight element not found!");
         }
-    }
-
-    drawObjects() {
-        console.log("Drawing objects...");
-        this.objects.forEach(obj => {
-            const img = this.images[obj.image];
-            if (img && img.complete && img.naturalHeight !== 0) {
-                console.log(`Drawing image: ${obj.image} at (${obj.x}, ${obj.y})`);
-                const objectElement = document.createElement('img');
-                objectElement.src = `/words/${obj.image}`;
-                objectElement.className = 'chess-object';
-                objectElement.style.width = `${this.squareSize}px`;
-                objectElement.style.height = `${this.squareSize}px`;
-                objectElement.style.position = 'absolute';
-                objectElement.style.zIndex = '20';
-                objectElement.style.left = `${obj.x * this.squareSize}px`;
-                objectElement.style.top = `${obj.y * this.squareSize}px`;
-                this.canvas.parentNode.appendChild(objectElement);
-            } else {
-                console.log(`Image not ready or failed to load: ${obj.image}`);
-            }
-        });
     }
 
     async moveKnight(direction) {
@@ -124,43 +61,66 @@ class ChessBoard {
                 break;
         }
         this.updateKnightPosition();
-
-        const response = await fetch('/collect_object', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.knightPosition),
-        });
-        const data = await response.json();
-        if (data.success) {
-            const currentWordElement = document.getElementById('current-word');
-            currentWordElement.textContent = `Pronounce: ${data.word}`;
-            console.log(`Current word updated: ${data.word}`);
-            this.objects = this.objects.filter(obj => obj.x !== this.knightPosition.x || obj.y !== this.knightPosition.y);
-            this.removeCollectedObject();
-        }
     }
 
     removeCollectedObject() {
+        console.log("Removing collected object...");
         const objects = this.canvas.parentNode.querySelectorAll('.chess-object');
         objects.forEach(obj => {
             const left = parseInt(obj.style.left) / this.squareSize;
             const top = parseInt(obj.style.top) / this.squareSize;
             if (left === this.knightPosition.x && top === this.knightPosition.y) {
                 obj.remove();
+                console.log(`Object at (${left}, ${top}) removed.`);
             }
+        });
+    }
+
+    clearObjects() {
+        console.log("Clearing old objects...");
+        const objects = this.canvas.parentNode.querySelectorAll('.chess-object');
+        objects.forEach(obj => {
+            obj.remove();
         });
     }
 
     async generateObjects() {
         console.log("Generating objects...");
+
+        // Antes de generar nuevos objetos, eliminamos los anteriores
+        this.clearObjects();
+
         const response = await fetch('/generate_objects', { method: 'POST' });
         this.objects = await response.json();
         console.log("Generated objects:", this.objects);
-        this.loadImages();
+
+        this.drawObjects();
+    }
+
+    drawObjects() {
+        console.log("Drawing objects...");
+        this.objects.forEach(obj => {
+            const objectElement = document.createElement('img');
+            objectElement.src = `/words/${obj.image}`;
+            objectElement.className = 'chess-object';
+            objectElement.style.width = `${this.squareSize}px`;
+            objectElement.style.height = `${this.squareSize}px`;
+            objectElement.style.position = 'absolute';
+            objectElement.style.zIndex = '20';
+            objectElement.style.left = `${obj.x * this.squareSize}px`;
+            objectElement.style.top = `${obj.y * this.squareSize}px`;
+            this.canvas.parentNode.appendChild(objectElement);
+        });
+    }
+
+    loadImages() {
+        // En este caso, llamamos directamente a generateObjects
+        this.generateObjects();
     }
 }
 
-const chessBoard = new ChessBoard('chessboard');
-chessBoard.generateObjects();
+// Instanciar ChessBoard y inicializar el control de voz
+document.addEventListener('DOMContentLoaded', () => {
+    const chessBoard = new ChessBoard('chessboard');
+    initializeVoiceControl(chessBoard);
+});

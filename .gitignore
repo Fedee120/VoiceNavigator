@@ -1,0 +1,7 @@
+/.config
+/.local
+/.cache
+/.pythonlibs
+/.vscode
+/.upm
+replit_zip_error_log.txt

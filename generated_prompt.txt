@@ -1,0 +1,898 @@
+### Proyecto - Estructura Completa de Carpetas
+
+- /
+    - .gitignore
+    - .replit
+    - generated_prompt.txt
+    - generate_images.py
+    - main.py
+    - poetry.lock
+    - prompter.py
+    - pyproject.toml
+    - replit.nix
+    - replit_zip_error_log.txt
+- static/
+    - css/
+        - styles.css
+    - images/
+        - easy.png
+        - hard.png
+        - medium.png
+    - js/
+        - chessboard.js
+        - voice_control.js
+    - sounds/
+        - move.mp3
+- templates/
+    - index.html
+- words/
+    - animals/
+        - bat.png
+        - bear.png
+        - bird.png
+        - bull.png
+        - butterfly.png
+        - cat.png
+        - chicken.png
+        - crab.png
+        - cricket.png
+        - crocodile.png
+        - deer.png
+        - doe.png
+        - dog.png
+        - dolphin.png
+        - duck.png
+        - eagle.png
+        - elephant.png
+        - fox.png
+        - frog.png
+        - giraffe.png
+        - hippo.png
+        - horse.png
+        - kangaroo.png
+        - lion.png
+        - lizard.png
+        - monkey.png
+        - mouse.png
+        - panda.png
+        - parrot.png
+        - penguin.png
+        - pig.png
+        - rabbit.png
+        - seal.png
+        - shark.png
+        - sheep.png
+        - snake.png
+        - spider.png
+        - tiger.png
+        - turtle.png
+        - whale.png
+        - wolf.png
+    - birthday_party/
+        - baloon.png
+        - birthday.png
+        - cake.png
+        - chocolate.png
+        - cupcake.png
+        - dance.png
+        - family.png
+        - friend.png
+        - gift.png
+        - guest.png
+        - invitation.png
+        - juice.png
+        - lollipop.png
+        - music.png
+        - party.png
+        - pizza.png
+        - sing.png
+        - sweets.png
+        - toy.png
+    - body/
+        - arm.png
+        - back.png
+        - beard.png
+        - blood.png
+        - bone.png
+        - brain.png
+        - ear.png
+        - eye.png
+        - foot.png
+        - hair.png
+        - hand.png
+        - head.png
+        - human-organs.png
+        - jaw.png
+        - leg.png
+        - moustache.png
+        - mouth.png
+        - muscle.png
+        - neck.png
+        - nose.png
+        - shoulder.png
+        - teeth.png
+    - calendar/
+        - after.png
+        - april.png
+        - before.png
+        - calendar.png
+        - century.png
+        - day.png
+        - december.png
+        - friday.png
+        - january.png
+        - june.png
+        - march.png
+        - monday.png
+        - month.png
+        - october.png
+        - saturday.png
+        - seasons.png
+        - september.png
+        - sunday.png
+        - thursday.png
+        - time.png
+        - today.png
+        - tuesday.png
+        - wednesday.png
+        - week.png
+        - weekend.png
+        - year.png
+        - yesterday.png
+    - colors/
+        - black.png
+        - blue.png
+        - golden.png
+        - green.png
+        - grey.png
+        - orange.png
+        - pink.png
+        - purple.png
+        - red.png
+        - silver.png
+        - white.png
+        - yellow.png
+    - family/
+        - babies.png
+        - baby.png
+        - boy.png
+        - brother.png
+        - child.png
+        - children.png
+        - daughter.png
+        - father.png
+        - friend.png
+        - girl.png
+        - grandchildren.png
+        - granddaughter.png
+        - grandfather.png
+        - grandmother.png
+        - grandparent.png
+        - grandson.png
+        - husband.png
+        - man.png
+        - marriage.png
+        - men.png
+        - mother.png
+        - parent.png
+        - people.png
+        - person.png
+        - sister.png
+        - son.png
+        - wife.png
+        - woman.png
+        - women.png
+        - younger.png
+    - food/
+        - apple.png
+        - banana.png
+        - beans.png
+        - beer.png
+        - berry.png
+        - bread.png
+        - burger.png
+        - butter.png
+        - cake.png
+        - candy.png
+        - carrot.png
+        - cheese.png
+        - chicken.png
+        - chili.png
+        - chips.png
+        - chocolate.png
+        - coconut.png
+        - coffee.png
+        - cook.png
+        - cookies.png
+        - corn.png
+        - drink.png
+        - eat.png
+        - egg.png
+        - fish.png
+        - fries.png
+        - fruits.png
+        - grapes.png
+        - herb.png
+        - ice.png
+        - icecream.png
+        - juice.png
+        - lemon.png
+        - lemonade.png
+        - lime.png
+        - meat.png
+        - milk.png
+        - oil.png
+        - onion.png
+        - orange.png
+        - pasta.png
+        - peach.png
+        - pear.png
+        - peas.png
+        - pepper.png
+        - pie.png
+        - pineapple.png
+        - pizza.png
+        - potato.png
+        - proteins.png
+        - rice.png
+        - salad.png
+        - salt.png
+        - sandwich.png
+        - sausage.png
+        - shrimp.png
+        - soup.png
+        - steak.png
+        - tea.png
+        - tomato.png
+        - turkey.png
+        - vegetable.png
+        - water.png
+        - watermelon.png
+        - wine.png
+    - house/
+        - armchair.png
+        - balcony.png
+        - bathroom.png
+        - bed.png
+        - bedroom.png
+        - bookcase.png
+        - building.png
+        - castle.png
+        - chair.png
+        - clock.png
+        - cupboard.png
+        - desk.png
+        - door.png
+        - elevator.png
+        - floor.png
+        - garden.png
+        - house.png
+        - kitchen.png
+        - pool.png
+        - roof.png
+        - sofa.png
+        - table.png
+        - wall.png
+        - window.png
+    - numbers/
+        - eight.png
+        - five.png
+        - four.png
+        - nine.png
+        - one.png
+        - seven.png
+        - six.png
+        - three.png
+        - two.png
+    - sports/
+        - ball.png
+        - basketball.png
+        - bowling.png
+        - boxing.png
+        - champion.png
+        - cycling.png
+        - field.png
+        - golf.png
+        - hockey.png
+        - rugby.png
+        - soccer.png
+        - swimming.png
+        - tennis.png
+    - weather/
+        - autumn.png
+        - cloud.png
+        - cold.png
+        - cyclone.png
+        - fog.png
+        - hot.png
+        - rain.png
+        - snow.png
+        - spring.png
+        - storm.png
+        - summer.png
+        - sun.png
+        - temperature.png
+        - wind.png
+        - winter.png
+
+
+### Contenido de Archivos Útiles
+
+
+## Carpeta: static
+
+## Carpeta: static\css
+
+### Archivo: styles.css
+```
+/* Estilos generales */
+body {
+    font-family: 'Comic Neue', cursive;
+    background-image: url('../images/background.png'); /* Añade una imagen de fondo amigable para niños */
+    background-size: cover;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* Título */
+h1 {
+    color: #ff6347; /* Un color vibrante */
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #ffa07a;
+}
+
+/* Área del juego */
+.game-area {
+    display: flex;
+    flex-direction: row; /* Cambiamos de column a row */
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Contenedor del tablero */
+#chessboard-container {
+    width: 400px;
+    height: 400px;
+    border: 5px solid #ff6347;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Panel de información */
+.info-panel {
+    background-color: #fffafa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+}
+
+/* Encabezado dentro del panel */
+.info-panel h2 {
+    font-size: 1.8em;
+    color: #ff6347;
+    margin-bottom: 15px;
+}
+
+/* Texto de puntaje y palabra actual */
+#score {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#current-word {
+    font-size: 1.8em;
+    color: #ff4500;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Botón de controles */
+#controls {
+    margin-top: 15px;
+}
+
+button {
+    font-size: 1.2em;
+    padding: 10px 30px;
+    cursor: pointer;
+    background-color: #32cd32;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: block;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: #2eb82e;
+    transform: scale(1.05);
+}
+
+/* Estado */
+#status {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #555;
+    text-align: center;
+}
+
+/* Indicador de escucha */
+#listening-indicator {
+    margin-top: 20px;
+}
+
+#listening-indicator.hidden {
+    display: none;
+}
+
+/* Piezas y objetos del juego */
+.chess-piece {
+    position: absolute;
+    z-index: 30;
+    transition: left 0.5s, top 0.5s;
+}
+
+.chess-object {
+    position: absolute;
+    z-index: 20;
+}
+
+/* Animación al mover */
+@keyframes moveKnight {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.chess-piece-moving {
+    animation: moveKnight 0.5s ease-in-out;
+}
+
+/* Efecto de brillo al recoger un objeto */
+.sparkle-effect {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('../images/sparkle.gif'); /* Un GIF de brillo */
+    background-size: cover;
+    z-index: 25;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #chessboard-container, .info-panel {
+        width: 90%;
+    }
+
+    .info-panel {
+        margin-top: 20px;
+    }
+}
+
+```
+
+## Carpeta: static\images
+
+## Carpeta: static\js
+
+### Archivo: chessboard.js
+```
+// static/js/chessboard.js
+
+class ChessBoard {
+    constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.squareSize = 50;
+        this.knightPosition = { x: 0, y: 0 };
+        this.objects = [];
+        this.images = {};
+        this.drawBoard();
+        this.createKnight();
+        this.loadImages();
+    }
+
+    drawBoard() {
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                this.ctx.fillStyle = (row + col) % 2 === 0 ? '#fff' : '#999';
+                this.ctx.fillRect(col * this.squareSize, row * this.squareSize, this.squareSize, this.squareSize);
+            }
+        }
+    }
+
+    createKnight() {
+        console.log("Creating knight...");
+        const knight = document.createElement('img');
+        knight.src = '/static/images/character.png'; // Ruta a la imagen del personaje
+        knight.className = 'chess-piece';
+        knight.style.width = `${this.squareSize}px`;
+        knight.style.height = `${this.squareSize}px`;
+        knight.style.position = 'absolute';
+        knight.style.zIndex = '30';
+        this.canvas.parentNode.appendChild(knight);
+        this.knightElement = knight;
+        this.updateKnightPosition();
+    }
+
+    updateKnightPosition() {
+        if (this.knightElement) {
+            const offset = 2; // Ajuste para centrar el personaje
+            this.knightElement.style.left = `${this.knightPosition.x * this.squareSize + offset}px`;
+            this.knightElement.style.top = `${this.knightPosition.y * this.squareSize + offset}px`;
+        }
+    }
+
+    async moveKnight(direction) {
+        console.log("Moving knight:", direction);
+        switch (direction) {
+            case 'up':
+                if (this.knightPosition.y > 0) this.knightPosition.y--;
+                break;
+            case 'down':
+                if (this.knightPosition.y < 7) this.knightPosition.y++;
+                break;
+            case 'left':
+                if (this.knightPosition.x > 0) this.knightPosition.x--;
+                break;
+            case 'right':
+                if (this.knightPosition.x < 7) this.knightPosition.x++;
+                break;
+        }
+        this.updateKnightPosition();
+    }
+
+    removeCollectedObject() {
+        console.log("Removing collected object...");
+        const objects = this.canvas.parentNode.querySelectorAll('.chess-object');
+        objects.forEach(obj => {
+            const left = parseInt(obj.style.left) / this.squareSize;
+            const top = parseInt(obj.style.top) / this.squareSize;
+            if (left === this.knightPosition.x && top === this.knightPosition.y) {
+                obj.remove();
+                console.log(`Object at (${left}, ${top}) removed.`);
+            }
+        });
+    }
+
+    clearObjects() {
+        console.log("Clearing old objects...");
+        const objects = this.canvas.parentNode.querySelectorAll('.chess-object');
+        objects.forEach(obj => {
+            obj.remove();
+        });
+    }
+
+    async generateObjects() {
+        console.log("Generating objects...");
+
+        // Antes de generar nuevos objetos, eliminamos los anteriores
+        this.clearObjects();
+
+        const response = await fetch('/generate_objects', { method: 'POST' });
+        this.objects = await response.json();
+        console.log("Generated objects:", this.objects);
+
+        this.drawObjects();
+    }
+
+    drawObjects() {
+        console.log("Drawing objects...");
+        this.objects.forEach(obj => {
+            const objectElement = document.createElement('img');
+            objectElement.src = `/words/${obj.image}`;
+            objectElement.className = 'chess-object';
+            objectElement.style.width = `${this.squareSize}px`;
+            objectElement.style.height = `${this.squareSize}px`;
+            objectElement.style.position = 'absolute';
+            objectElement.style.zIndex = '20';
+            objectElement.style.left = `${obj.x * this.squareSize}px`;
+            objectElement.style.top = `${obj.y * this.squareSize}px`;
+            this.canvas.parentNode.appendChild(objectElement);
+        });
+    }
+
+    loadImages() {
+        // En este caso, llamamos directamente a generateObjects
+        this.generateObjects();
+    }
+}
+
+// Instanciar ChessBoard y inicializar el control de voz
+document.addEventListener('DOMContentLoaded', () => {
+    const chessBoard = new ChessBoard('chessboard');
+    initializeVoiceControl(chessBoard);
+});
+
+```
+
+### Archivo: voice_control.js
+```
+// static/js/voice_control.js
+
+function initializeVoiceControl(chessBoard) {
+    class VoiceControl {
+        constructor(chessBoard) {
+            this.chessBoard = chessBoard;
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert('Your browser does not support Speech Recognition. Please use Chrome or Edge.');
+                return;
+            }
+            this.recognition = new SpeechRecognition();
+            this.recognition.lang = 'en-US';
+            this.recognition.continuous = true; // Siempre escuchando
+            this.recognition.interimResults = false;
+            this.recognition.maxAlternatives = 1;
+            this.setupEventListeners();
+            this.moveSound = null;
+            this.currentWord = "";
+            this.score = 0;
+        }
+    
+        setupEventListeners() {
+            const statusElement = document.getElementById('status');
+    
+            // Iniciar reconocimiento de voz automáticamente
+            this.recognition.start();
+            statusElement.textContent = 'Listening...';
+            document.getElementById('listening-indicator').classList.remove('hidden');
+    
+            this.recognition.addEventListener('result', async (event) => {
+                let command = event.results[0][0].transcript.toLowerCase();
+                const confidence = event.results[0][0].confidence;
+                console.log(`Recognized command: ${command} (confidence: ${confidence})`);
+    
+                if (confidence < 0.6) {
+                    statusElement.textContent = 'Sorry, I did not catch that. Please try again.';
+                    return;
+                }
+    
+                await this.processCommand(command);
+            });
+    
+            this.recognition.addEventListener('error', (event) => {
+                let message = '';
+                switch(event.error) {
+                    case 'no-speech':
+                        message = 'No speech was detected. Please try again.';
+                        break;
+                    case 'audio-capture':
+                        message = 'No microphone was found. Ensure that a microphone is installed.';
+                        break;
+                    case 'not-allowed':
+                        message = 'Permission to use microphone is blocked. Please allow access to your microphone.';
+                        break;
+                    default:
+                        message = `Error occurred in speech recognition: ${event.error}`;
+                        break;
+                }
+                statusElement.textContent = message;
+                document.getElementById('listening-indicator').classList.add('hidden');
+            });
+    
+            this.recognition.addEventListener('end', () => {
+                console.log('Recognition ended');
+                // Reiniciar el reconocimiento para que siempre esté escuchando
+                this.recognition.start();
+            });
+        }
+    
+        async processCommand(command) {
+            const validMoves = ['up', 'down', 'left', 'right'];
+            const commandWords = command.toLowerCase().split(' ');
+    
+            // Busca una dirección válida en las palabras del comando
+            const moveDirection = validMoves.find(move => commandWords.includes(move));
+            if (moveDirection) {
+                await this.chessBoard.moveKnight(moveDirection);
+                if (this.moveSound) {
+                    this.moveSound.play();
+                }
+            } else if (this.currentWord) {
+                // Verifica si el usuario está intentando pronunciar la palabra actual
+                await this.checkPronunciation(command);
+            } else {
+                document.getElementById('status').textContent = 'Invalid command. Please say "up", "down", "left", "right", or pronounce the current word.';
+            }
+        }
+    
+        async checkPronunciation(pronouncedWord) {
+            const response = await fetch('/check_pronunciation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ word: pronouncedWord }),
+            });
+            const data = await response.json();
+            
+            const statusElement = document.getElementById('status');
+            const scoreElement = document.getElementById('score');
+            const currentWordElement = document.getElementById('current-word');
+            
+            if (data.correct) {
+                statusElement.textContent = 'Great job! You said it right!';
+                this.score = data.score;
+                scoreElement.textContent = `Score: ${this.score}`;
+                this.currentWord = "";
+                currentWordElement.textContent = "";
+    
+                // Reproducir sonido de éxito
+                const successSound = new Howl({
+                    src: ['/static/sounds/success.mp3']
+                });
+                successSound.play();
+    
+                // Mostrar confeti
+                this.showConfetti();
+    
+                // Eliminar el objeto recolectado
+                this.chessBoard.removeCollectedObject();
+    
+            } else {
+                statusElement.textContent = 'Oops! Try again!';
+                // Reproducir sonido de error
+                const errorSound = new Howl({
+                    src: ['/static/sounds/error.mp3']
+                });
+                errorSound.play();
+            }
+        }
+    
+        setCurrentWord(word) {
+            this.currentWord = word;
+            const currentWordElement = document.getElementById('current-word');
+            currentWordElement.textContent = word ? `Repeat: ${word}` : '';
+            console.log(`Current word set: ${word}`);
+        }
+    
+        showConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    }
+    
+    const voiceControl = new VoiceControl(chessBoard);
+    
+    // Actualizar el método moveKnight para sincronizar la palabra actual
+    const originalMoveKnight = chessBoard.moveKnight.bind(chessBoard);
+    chessBoard.moveKnight = async function(direction) {
+        await originalMoveKnight(direction);
+    
+        // Verificar si hay un objeto en la nueva posición
+        const response = await fetch('/check_for_object', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.knightPosition),
+        });
+        const data = await response.json();
+        if (data.success) {
+            const currentWordElement = document.getElementById('current-word');
+            currentWordElement.textContent = `Repeat: ${data.word}`;
+            console.log(`Current word updated: ${data.word}`);
+    
+            // Actualizar la palabra actual en el control de voz
+            voiceControl.setCurrentWord(data.word);
+        } else {
+            voiceControl.setCurrentWord('');
+            const currentWordElement = document.getElementById('current-word');
+            currentWordElement.textContent = '';
+        }
+    };
+}
+
+```
+
+## Carpeta: static\sounds
+
+## Carpeta: templates
+
+### Archivo: index.html
+```
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta y título -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Adventure Game</title>
+    <!-- Enlaces a estilos y fuentes -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Librerías JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <!-- Incluir annyang.js desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>English Adventure!</h1>
+        <div class="game-area">
+            <!-- Tablero a la izquierda -->
+            <div id="chessboard-container">
+                <canvas id="chessboard" width="400" height="400"></canvas>
+            </div>
+            <!-- Panel de información a la derecha -->
+            <div class="info-panel">
+                <h2>Your Mission</h2>
+                <div id="score">Score: 0</div>
+                <div id="current-word">Collect the words!</div>
+                <div id="controls">
+                    <!-- Eliminamos el botón -->
+                    <!-- <button id="startListening">🎤 Start Speaking</button> -->
+                    <p id="status">Say a command!</p>
+                    <!-- Indicador de escucha -->
+                    <div id="listening-indicator" class="hidden">
+                        <img src="/static/images/listening.gif" alt="Listening..." width="100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/chessboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/voice_control.js') }}"></script>
+</body>
+</html>
+
+```
+
+## Carpeta: words
+
+## Carpeta: words\animals
+
+## Carpeta: words\birthday_party
+
+## Carpeta: words\body
+
+## Carpeta: words\calendar
+
+## Carpeta: words\colors
+
+## Carpeta: words\family
+
+## Carpeta: words\food
+
+## Carpeta: words\house
+
+## Carpeta: words\numbers
+
+## Carpeta: words\sports
+
+## Carpeta: words\weather
+
+### Instrucciones adicionales:
+

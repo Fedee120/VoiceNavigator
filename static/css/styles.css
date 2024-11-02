@@ -1,86 +1,166 @@
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Comic Neue', cursive;
+    background-image: url('../images/background.png'); /* Añade una imagen de fondo amigable para niños */
+    background-size: cover;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
 }
 
+/* Contenedor principal */
 .container {
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    padding: 20px;
+    border-radius: 15px;
 }
 
+/* Título */
 h1 {
+    color: #ff6347; /* Un color vibrante */
+    font-size: 3em;
     margin-bottom: 20px;
-    color: #333;
+    text-shadow: 2px 2px #ffa07a;
 }
 
+/* Área del juego */
 .game-area {
     display: flex;
-    justify-content: center;
+    flex-direction: row; /* Cambiamos de column a row */
     align-items: flex-start;
+    justify-content: center;
     gap: 20px;
 }
 
+/* Contenedor del tablero */
 #chessboard-container {
-    position: relative;
     width: 400px;
     height: 400px;
+    border: 5px solid #ff6347;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
-#chessboard {
-    border: 2px solid #333;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
+/* Panel de información */
 .info-panel {
-    background-color: #fff;
+    background-color: #fffafa;
     padding: 20px;
     border-radius: 10px;
+    width: 300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
 }
 
-#score, #current-word {
-    font-size: 18px;
+/* Encabezado dentro del panel */
+.info-panel h2 {
+    font-size: 1.8em;
+    color: #ff6347;
+    margin-bottom: 15px;
+}
+
+/* Texto de puntaje y palabra actual */
+#score {
+    font-size: 1.5em;
+    color: #333;
     margin-bottom: 10px;
 }
 
+#current-word {
+    font-size: 1.8em;
+    color: #ff4500;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Botón de controles */
 #controls {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 button {
-    font-size: 16px;
-    padding: 10px 20px;
+    font-size: 1.2em;
+    padding: 10px 30px;
     cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #32cd32;
+    color: #fff;
     border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: block;
+    margin: 0 auto;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #2eb82e;
+    transform: scale(1.05);
 }
 
+/* Estado */
 #status {
-    margin-top: 10px;
-    font-style: italic;
-    color: #666;
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #555;
+    text-align: center;
 }
 
+/* Indicador de escucha */
+#listening-indicator {
+    margin-top: 20px;
+}
+
+#listening-indicator.hidden {
+    display: none;
+}
+
+/* Piezas y objetos del juego */
 .chess-piece {
     position: absolute;
     z-index: 30;
-    transition: left 0.3s, top 0.3s;
+    transition: left 0.5s, top 0.5s;
 }
 
 .chess-object {
     position: absolute;
     z-index: 20;
+}
+
+/* Animación al mover */
+@keyframes moveKnight {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.chess-piece-moving {
+    animation: moveKnight 0.5s ease-in-out;
+}
+
+/* Efecto de brillo al recoger un objeto */
+.sparkle-effect {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('../images/sparkle.gif'); /* Un GIF de brillo */
+    background-size: cover;
+    z-index: 25;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #chessboard-container, .info-panel {
+        width: 90%;
+    }
+
+    .info-panel {
+        margin-top: 20px;
+    }
 }
