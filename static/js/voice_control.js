@@ -11,25 +11,52 @@ function initializeVoiceControl(chessBoard) {
             }
             this.recognition = new SpeechRecognition();
             this.recognition.lang = 'en-US';
-            this.recognition.continuous = true; // Siempre escuchando
+            this.recognition.continuous = true;
             this.recognition.interimResults = false;
             this.recognition.maxAlternatives = 1;
             this.setupEventListeners();
             this.moveSound = null;
             this.currentWord = "";
             this.score = 0;
+
+            // Get modal elements
+            this.modal = document.getElementById('endgame-modal');
+            this.finalScoreElement = document.getElementById('final-score');
+            this.continueButton = document.getElementById('continue-button');
+            this.finishButton = document.getElementById('finish-button');
+
+            // Add events to modal buttons
+            this.continueButton.addEventListener('click', () => {
+                this.continueGame();
+            });
+
+            this.finishButton.addEventListener('click', () => {
+                this.finishGame();
+            });
+
+            // Get the "Skip" button
+            this.skipButton = document.getElementById('skip-button');
+
+            // Add event to the "Skip" button
+            this.skipButton.addEventListener('click', () => {
+                this.skipCurrentWord();
+            });
         }
     
         setupEventListeners() {
+            // Remove previous event listeners if necessary
+            this.recognition.onresult = null;
+            this.recognition.onerror = null;
+            this.recognition.onend = null;
             const statusElement = document.getElementById('status');
     
-            // Iniciar reconocimiento de voz automáticamente
+            // Start voice recognition automatically
             this.recognition.start();
             statusElement.textContent = 'Listening...';
             document.getElementById('listening-indicator').classList.remove('hidden');
     
             this.recognition.addEventListener('result', async (event) => {
-                // Obtener el índice del último resultado
+                // Get the index of the last result
                 const lastResultIndex = event.results.length - 1;
                 const transcript = event.results[lastResultIndex][0].transcript.trim();
                 const confidence = event.results[lastResultIndex][0].confidence;
@@ -67,7 +94,7 @@ function initializeVoiceControl(chessBoard) {
     
             this.recognition.addEventListener('end', () => {
                 console.log('Recognition ended');
-                // Reiniciar el reconocimiento para que siempre esté escuchando
+                // Restart recognition to keep listening
                 this.recognition.start();
             });
         }
@@ -76,7 +103,7 @@ function initializeVoiceControl(chessBoard) {
             const validMoves = ['up', 'down', 'left', 'right'];
             const commandWords = command.toLowerCase().split(' ');
     
-            // Busca una dirección válida en las palabras del comando
+            // Look for a valid direction in the command words
             const moveDirection = validMoves.find(move => commandWords.includes(move));
             if (moveDirection) {
                 await this.chessBoard.moveKnight(moveDirection);
@@ -84,7 +111,7 @@ function initializeVoiceControl(chessBoard) {
                     this.moveSound.play();
                 }
             } else if (this.currentWord) {
-                // Verifica si el usuario está intentando pronunciar la palabra actual
+                // Check if the user is trying to pronounce the current word
                 await this.checkPronunciation(command);
             } else {
                 document.getElementById('status').textContent = 'Invalid command. Please say "up", "down", "left", "right", or pronounce the current word.';
@@ -106,32 +133,70 @@ function initializeVoiceControl(chessBoard) {
             const currentWordElement = document.getElementById('current-word');
             
             if (data.correct) {
-                statusElement.textContent = 'Great job! You said it right!';
+                statusElement.textContent = 'Well done! You said it correctly!';
                 this.score = data.score;
                 scoreElement.textContent = `Score: ${this.score}`;
                 this.currentWord = "";
                 currentWordElement.textContent = "";
-    
-                // Reproducir sonido de éxito
+        
+                // Play success sound
                 const successSound = new Howl({
                     src: ['/static/sounds/success.mp3']
                 });
                 successSound.play();
-    
-                // Mostrar confeti
+        
+                // Show confetti
                 this.showConfetti();
-    
-                // Eliminar el objeto recolectado
+        
+                // Remove the collected object visually
                 this.chessBoard.removeCollectedObject();
-    
+        
+                // Remove the object from the list of objects
+                this.chessBoard.objects = this.chessBoard.objects.filter(obj => {
+                    return !(obj.x === this.chessBoard.knightPosition.x && obj.y === this.chessBoard.knightPosition.y);
+                });
+        
+                // Check if there are no more objects
+                if (this.chessBoard.objects.length === 0) {
+                    console.log('All objects collected, showing end game options.');
+                    this.showEndGameOptions();
+                }
+        
             } else {
                 statusElement.textContent = 'Oops! Try again!';
-                // Reproducir sonido de error
+                // Play error sound
                 const errorSound = new Howl({
                     src: ['/static/sounds/error.mp3']
                 });
                 errorSound.play();
             }
+        }        
+
+        showEndGameOptions() {
+            console.log('showEndGameOptions() called');
+            // Show the modal with options
+            this.finalScoreElement.textContent = this.score;
+            this.modal.classList.remove('hidden');
+        }
+
+        continueGame() {
+            // Hide the modal
+            this.modal.classList.add('hidden');
+            // Generate new objects
+            this.chessBoard.generateObjects();
+            // Update status message
+            document.getElementById('status').textContent = 'Say a command!';
+        }
+
+        finishGame() {
+            // Hide the modal
+            this.modal.classList.add('hidden');
+            // Show final message
+            alert(`Game over! Your final score is: ${this.score}`);
+            // Stop voice recognition
+            this.recognition.stop();
+            // Disable future actions
+            document.getElementById('status').textContent = 'Game over. Thank you for playing!';
         }
     
         setCurrentWord(word) {
@@ -148,16 +213,45 @@ function initializeVoiceControl(chessBoard) {
                 origin: { y: 0.6 }
             });
         }
+
+        skipCurrentWord() {
+            if (this.currentWord) {
+                // Remove the object from the board's object list
+                this.chessBoard.objects = this.chessBoard.objects.filter(obj => {
+                    return !(obj.x === this.chessBoard.knightPosition.x && obj.y === this.chessBoard.knightPosition.y);
+                });
+    
+                // Remove the object visually
+                this.chessBoard.removeCollectedObject();
+    
+                // Reset the current word
+                this.currentWord = "";
+                const currentWordElement = document.getElementById('current-word');
+                currentWordElement.textContent = "";
+    
+                // Update the status
+                const statusElement = document.getElementById('status');
+                statusElement.textContent = 'Word skipped. Continue playing!';
+    
+                // Check if there are no more objects
+                if (this.chessBoard.objects.length === 0) {
+                    this.showEndGameOptions();
+                }
+            } else {
+                const statusElement = document.getElementById('status');
+                statusElement.textContent = 'There is no word to skip.';
+            }
+        }
     }
     
     const voiceControl = new VoiceControl(chessBoard);
     
-    // Actualizar el método moveKnight para sincronizar la palabra actual
+    // Update the moveKnight method to sync the current word
     const originalMoveKnight = chessBoard.moveKnight.bind(chessBoard);
     chessBoard.moveKnight = async function(direction) {
         await originalMoveKnight(direction);
     
-        // Verificar si hay un objeto en la nueva posición
+        // Check if there is an object at the new position
         const response = await fetch('/check_for_object', {
             method: 'POST',
             headers: {
@@ -171,7 +265,7 @@ function initializeVoiceControl(chessBoard) {
             currentWordElement.textContent = `Repeat: ${data.word}`;
             console.log(`Current word updated: ${data.word}`);
     
-            // Actualizar la palabra actual en el control de voz
+            // Update the current word in voice control
             voiceControl.setCurrentWord(data.word);
         } else {
             voiceControl.setCurrentWord('');

@@ -22,13 +22,18 @@ class ChessBoard {
         }
     }
 
+    resetKnightPosition() {
+        this.knightPosition = { x: 0, y: 0 };
+        this.updateKnightPosition();
+    }
+
     createKnight() {
         console.log("Creating knight...");
         const knight = document.createElement('img');
-        knight.src = '/static/images/character.png'; // Ruta a la imagen del personaje
+        knight.src = '/static/images/character.gif'; // Ruta a la imagen del personaje
         knight.className = 'chess-piece';
-        knight.style.width = `${this.squareSize}px`;
-        knight.style.height = `${this.squareSize}px`;
+        knight.style.width = `${this.squareSize+30}px`;
+        knight.style.height = `${this.squareSize+30}px`;
         knight.style.position = 'absolute';
         knight.style.zIndex = '30';
         this.canvas.parentNode.appendChild(knight);
